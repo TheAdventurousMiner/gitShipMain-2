@@ -71,6 +71,8 @@ void draw(){
     }
     //location
      alpha.display();
+     earth.update();
+     earth.display();
   
     //viewscreen
     if(showDialogue){
@@ -97,6 +99,7 @@ void init(){
   
   //checksum
   healthbar = new Checksum();
+  healthbar.checksum += pow(2, 2);
   //starfield simulation
   for(int i = 0; i < stars. length; i++){
     stars[i] = new Star();
@@ -119,6 +122,7 @@ void init(){
   
   healthbar.checksum = unbinary(new String(bin));
   
+  earth = new Planet(2*width/3, height/4, 50);
   //dialogue
   person = new Person();
   //junk
@@ -129,11 +133,13 @@ void init(){
 
 void dropOutOfWarp(){
   speed = 0.00;
-  float rndX = 298;
-  float rndY = 149;
+  float rndX = 383; // 150 to 450
+  float rndY = 121; // 100, 200
   x = map(rndX, 0.25*width, 0.75*width, 0, 10);
   y = map(rndY, 0.25*height, 0.5*height, 0, 10);
-  location = "Trafalgar Stn";
+  earth = new Planet(rndX, rndY, random(50, 375));
+  earth.sliders();
+  location = "SCAET Colony";
 }
 
 void noSignal(){
